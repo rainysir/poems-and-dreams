@@ -9,7 +9,7 @@
     ]
   },
   "rules": {
-    "quotemark": [true, "single"],
+    "quotemark": [true, "single", "jsx-double"],
     "ordered-imports": false,
     "semicolon": false,
     "jsx-boolean-value": false,
