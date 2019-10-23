@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+set passwd [lindex $argv 0]
+spawn scp -r build root@iszhy.com:/workspace/poems-and-dreams
+expect {
+  "密码："
+        {
+          send "$passwd\n"
+        }
+    "pass"
+         {
+           send "$passwd\n"
+         }
+    "yes/no"
+         {
+           sleep 5
+           send_user "send yes"
+           send "yes\n"
+         }
+    eof
+     {
+         sleep 5
+         send_user "eof\n"
+     }
+}
+send "exit\r"
+expect eof
