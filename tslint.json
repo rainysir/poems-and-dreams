@@ -7,6 +7,9 @@
     "quotemark": [true, "single"],
     "ordered-imports": false,
     "semicolon": false,
+    "jsx-boolean-value": false,
+    "arrow-parens": false,
+    "interface-over-type-literal": false,
     "no-console": [true, "warn"]
   }
 }
