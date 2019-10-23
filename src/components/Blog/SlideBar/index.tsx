@@ -15,6 +15,13 @@ const SlideBar: React.FC = () => {
         <h1 className="name">Zhangsir</h1>
         <div className="job">Front-end</div>
         <div className="motto">Life is not only about compromise, but also poems and dreams</div>
+        <div className="menus">
+          <div className="menu-item"></div>
+          <div className="menu-item"></div>
+          <div className="menu-item"></div>
+          <div className="menu-item"></div>
+          <div className="menu-item"></div>
+        </div>
       </div>
     </div>
   )
