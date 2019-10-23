@@ -1,0 +1,12 @@
+{
+  "extends": ["tslint:latest", "tslint-react"],
+  "compilerOptions": {
+    "jsx": "react"
+  },
+  "rules": {
+    "quotemark": [true, "single"],
+    "ordered-imports": false,
+    "semicolon": false,
+    "no-console": [true, "warn"]
+  }
+}
