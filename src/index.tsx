@@ -6,19 +6,16 @@ import http from '@404space/http'
 import httpConfig from './config/http'
 import * as serviceWorker from './serviceWorker'
 
-function httpResponseSuccessHandler(data) {
+function httpResponseSuccessHandler(data: any) {
   if (data.success) {
     return data && data.data
   } else {
-    throw '500'
+    throw new Error('服务器异常')
   }
 }
 
-function httpResponseErrorHandler(err) {
-  throw err
-}
 http.register(httpConfig)
-http.interceptors.result.use(httpResponseSuccessHandler, httpResponseErrorHandler)
+http.interceptors.result.use(httpResponseSuccessHandler)
 
 ReactDOM.render(<Router />, document.getElementById('root'))
 
