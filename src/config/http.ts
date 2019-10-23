@@ -18,11 +18,11 @@ export const API_LIST = {
   UPLOAD_SVG: '/api/svg/upload',
   ICONS: '/api/icon/all',
   UPLOAD_ICON: '/api/icon/upload',
-  UPDATE_ICON: '/api/icon/update/${id}',
+  UPDATE_ICON: '/api/icon/update/${id}', // eslint-disable-line
   DOWNLOAD_ICON: '/api/icon/download',
   OPERATION: '/api/operation/oneMonth',
   READ_OPERATION: '/api/operation/read',
-  DELETE_ICON: '/api/icon/delete/${id}',
+  DELETE_ICON: '/api/icon/delete/${id}', // eslint-disable-line
 }
 
 export default {

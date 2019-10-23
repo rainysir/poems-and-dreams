@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import './index.scss'
 import Router from './containers/Router'
 import http from '@404space/http'
 import httpConfig from './config/http'

@@ -3,6 +3,11 @@
   "compilerOptions": {
     "jsx": "react"
   },
+  "linterOptions": {
+    "exclude": [
+      "node_modules"
+    ]
+  },
   "rules": {
     "quotemark": [true, "single"],
     "ordered-imports": false,
@@ -10,6 +15,7 @@
     "jsx-boolean-value": false,
     "arrow-parens": false,
     "no-invalid-template-strings": false,
+    "no-template-curly-in-string": false,
     "object-literal-sort-keys": false,
     "interface-over-type-literal": false,
     "no-console": [true, "warn"]
