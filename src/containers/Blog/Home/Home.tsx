@@ -1,7 +1,7 @@
 import React from 'react'
 import './Home.css'
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <div>
       123
@@ -9,4 +9,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default Home
