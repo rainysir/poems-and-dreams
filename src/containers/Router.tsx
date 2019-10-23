@@ -4,13 +4,13 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
-import BlogHome from './Blog/Home/Home'
+import BlogHome from './Blog/Home/index'
 
 const MainRouter: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path="/">
           <BlogHome />
         </Route>
       </Switch>
