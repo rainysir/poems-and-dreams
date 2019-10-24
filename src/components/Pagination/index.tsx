@@ -1,9 +1,16 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useCallback } from 'react'
 import './style.scss'
 
 interface IPagination {
   total: number;
   pageSize?: number;
+}
+
+interface IPaginationBtnItem {
+  onClick: (payload: any) => void;
+  disPatchkey: number | string;
+  count?: number;
+  isCurrent?: boolean
 }
 
 interface IPaginationState {
@@ -33,6 +40,26 @@ function reducer(
   }
 }
 
+const PaginationBtnItem: React.FC<IPaginationBtnItem> = props => {
+  let className = 'item'
+  const isNumberBtn = props.disPatchkey !== 'next' && props.disPatchkey !== 'prev'
+  if (!isNumberBtn) {
+    className = String(props.disPatchkey)
+  }
+  if (props.isCurrent) {
+    className += ' current'
+  }
+  const handleClick = useCallback(() => {
+    if (isNumberBtn) {
+      return props.onClick({ type: 'set', payload: { count: props.count }})
+    }
+    props.onClick({ type: props.disPatchkey })
+  }, [])
+  return (
+    <div className={className} onClick={handleClick}>{props.children}</div>
+  )
+}
+
 const Pagination: React.FC<IPagination> = props => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const pageSize = props.pageSize || 10
@@ -42,29 +69,37 @@ const Pagination: React.FC<IPagination> = props => {
   return (
     <div className="pagination-wrap">
       {showPrev ? (
-        <div className="prev" onClick={() => dispatch({ type: 'prev' })}>« Prev</div>
+        <PaginationBtnItem
+          disPatchkey="prev"
+          onClick={dispatch}
+        >
+          « Prev
+        </PaginationBtnItem>
       ) : null}
       {
         [...Array(pageCount)].map((_, index) => {
           const showCount = index + 1
           const isCurrent = showCount === state.currentPage
-          let className = 'item'
-          if (isCurrent) {
-            className += ' current'
-          }
           return (
-            <div
-              className={className}
+            <PaginationBtnItem
+              disPatchkey={showCount}
+              onClick={dispatch}
               key={index}
-              onClick={() => dispatch({ type: 'set', payload: { count: showCount } })}
+              count={showCount}
+              isCurrent={isCurrent}
             >
-              {index + 1}
-            </div>
+              {showCount}
+            </PaginationBtnItem>
           )
         })
       }
       {showNext ? (
-        <div className="next" onClick={() => dispatch({ type: 'next' })}>Next »</div>
+        <PaginationBtnItem
+          disPatchkey="next"
+          onClick={dispatch}
+        >
+          Next »
+        </PaginationBtnItem>
       ) : null}
     </div>
   )
@@ -73,6 +108,10 @@ const Pagination: React.FC<IPagination> = props => {
 Pagination.defaultProps = {
   total: 0,
   pageSize: 10,
+}
+
+PaginationBtnItem.defaultProps  = {
+  onClick: () => {},
 }
 
 export default Pagination
