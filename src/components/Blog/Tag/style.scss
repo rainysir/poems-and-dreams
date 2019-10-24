@@ -1,0 +1,36 @@
+$tagheight: 22px;
+.article-tag-wrap {
+  display: inline-block;
+  > .tag {
+    display: inline-block;
+    background: #5a8ed8;
+    border-radius: 0 5px 5px 0;
+    color: #fff;
+    position: relative;
+    line-height: $tagheight;
+    font-size: 13px;
+    padding: 0 5px 0 10px;
+    font-family: serifs;
+    margin: 0 ($tagheight / 2);
+    > .before {
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 0;
+      left: -$tagheight;
+      border: ($tagheight / 2) solid transparent;
+      border-right-color: #5a8ed8;
+    }
+    > .after {
+      width: 4px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+      position: absolute;
+      top: 50%;
+      margin-top: -2px;
+      left: 2px;
+    }
+  }
+}

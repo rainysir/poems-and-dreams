@@ -1,0 +1,52 @@
+.article-card-wrap {
+  min-height: 100px;
+  border-radius: 20px;
+  width: 100%;
+  box-shadow: 3px 2px 8px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.2);
+  visibility: visible;
+  transform: translateY(0px) scale(1);
+  opacity: 1;
+  transition: all 0.2s ease-in 0s, transform 0s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+  .header {
+    padding: 10px 20px;
+    border-left: 6px solid rgba(255,255,255, 0.2);
+    border-top-left-radius: 20px;
+    &:hover {
+      border-left: 5px solid #9c9;
+      .title {
+        color: #b0a0aa;
+        cursor: pointer;
+      }
+    }
+    .title {
+      height: 100%;
+    }
+  }
+  .content {
+    padding: 20px 26px;
+  }
+  .footer {
+    margin: 30px;
+    padding: 20px 0 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    > .tags {
+      flex: 1;
+      flex-direction: row;
+    }
+    .read-article-btn {
+      width: 88px;
+      border-radius: 5px;
+      background: #0bf;
+      color: #fff;
+      transition: background 0.3s;
+      opacity: 0.75;
+      font-size: 14px;
+      text-align: center;
+      padding: 1px 0;
+      cursor: pointer;
+    }
+  }
+}

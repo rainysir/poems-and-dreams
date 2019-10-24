@@ -1,11 +1,12 @@
 import React from 'react'
-import './Home.scss'
+import './style.scss'
 import wallPaper from '../../../assets/wallPaper.jpg'
 import SlideBar from '../../../components/Blog/SlideBar'
+import ArticleCard from '../../../components/Blog/ArticleCard'
 
 const Home: React.FC = () => {
   return (
-    <div className="container">
+    <div className="blog-container">
       <div className="parallax-mirror">
         <img
           className="parallax-slider"
@@ -14,6 +15,9 @@ const Home: React.FC = () => {
         />
       </div>
       <SlideBar />
+      <div className="content">
+        <ArticleCard />
+      </div>
     </div>
   )
 }

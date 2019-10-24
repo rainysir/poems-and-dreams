@@ -4,7 +4,7 @@ import avatar from '../../../assets/avatar.jpg'
 
 const SlideBar: React.FC = () => {
   return (
-    <div className="container">
+    <div className="slide-bar-container">
       <div className="top" />
       <div className="nav-wrap">
         <img

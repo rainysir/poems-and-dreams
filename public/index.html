@@ -26,6 +26,19 @@
     -->
     <title>Poems and dreams</title>
     <style>
+      @font-face {
+        font-family: chineseCharacter;
+        src: local('PingFang SC'), local('Hiragino Sans GB'), local('Microsoft YaHei');
+        unicode-range: 0x4e00-0x9fa5;/*汉字字符集*/
+      }
+      @font-face {
+        font-family: english;
+        src: lcoal('Cursive'), local('Helvetica Neue'), local('Helvetica'), local('Arial'), local('sans-serif');
+        unicode-range: 19968, 40869;
+      }
+      html, body {
+        font-family: Cursive, 'Pingfang SC', 'microsoft yahei'!important;
+      }
       html,
       body,
       #root {

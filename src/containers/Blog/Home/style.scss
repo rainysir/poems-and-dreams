@@ -1,0 +1,13 @@
+.blog-container {
+  height: 100%;
+  display: flex;
+  >.content {
+    height: 100%;
+    flex: 1;
+    padding: 30px;
+  }
+}
+.parallax-mirror {
+  z-index: -100;
+  position: fixed;
+}
