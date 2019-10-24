@@ -10,7 +10,7 @@ function httpResponseSuccessHandler(data: any) {
   if (data.success) {
     return data && data.data
   } else {
-    throw new Error('服务器异常')
+    return data
   }
 }
 

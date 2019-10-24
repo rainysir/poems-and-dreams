@@ -14,6 +14,9 @@ export const BASE_CONFIG = {
 }
 
 export const API_LIST = {
+  // blog
+  ARTICLES: '/api/article',
+
   USER_INFO: '/api/user_info',
   UPLOAD_SVG: '/api/svg/upload',
   ICONS: '/api/icon/all',

@@ -2,13 +2,18 @@ import React from 'react'
 import './style.scss'
 import Tag from '../Tag'
 
-const ArticleCard: React.FC = () => {
+interface IArticleCardProps {
+  title: string;
+  description: string;
+}
+
+const ArticleCard: React.FC<IArticleCardProps> = props => {
   return (
     <div className="article-card-wrap">
       <div className="header">
-        <h1 className="title">Test</h1>
+        <h1 className="title">{props.title}</h1>
       </div>
-      <div className="content">这里是内容</div>
+      <div className="content">{props.description}</div>
       <div className="footer">
         <div className="tags">
           <Tag color="red">https</Tag>
