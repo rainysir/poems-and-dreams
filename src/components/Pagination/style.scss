@@ -1,0 +1,26 @@
+.pagination-wrap {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  > .item {
+    width: 20px;
+    height: 20px;
+    background: #4d4d4d;
+    border-radius: 50%;
+    color: #fff;
+    line-height: 20px;
+    font-size: 12px;
+    margin: 0 3px 0;
+    text-align: center;
+    cursor: pointer;
+  }
+  > .current {
+    background: #fff;
+    color: #000;
+  }
+  > .prev, .next {
+    cursor: pointer;
+    margin: 0 20px;
+    font-weight: 900;
+  }
+}

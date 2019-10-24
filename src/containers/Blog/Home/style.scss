@@ -2,9 +2,8 @@
   height: 100%;
   display: flex;
   >.content {
-    height: 100%;
     flex: 1;
-    padding: 30px;
+    padding: 30px 30px 100px;
     overflow: scroll;
   }
 }
