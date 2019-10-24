@@ -21,7 +21,8 @@ $tagheight: 22px;
       border: ($tagheight / 2) solid transparent;
       border-right-color: #5a8ed8;
     }
-    > .after {
+    &::after {
+      content: '';
       width: 4px;
       height: 4px;
       background-color: #fff;
