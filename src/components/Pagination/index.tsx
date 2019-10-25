@@ -5,13 +5,6 @@ import React, {
 } from 'react'
 import './style.scss'
 
-interface IPagination {
-  total: number;
-  pageSize?: number;
-  current: number;
-  onChange: (page: number) => void
-}
-
 interface IPaginationBtnItem {
   onClick: (payload: any) => void;
   disPatchkey: number | string;
@@ -19,33 +12,6 @@ interface IPaginationBtnItem {
   isCurrent?: boolean;
   show?: boolean;
   isNumberBtn?: boolean;
-}
-
-interface IPaginationState {
-  currentPage: number;
-}
-
-const initialState: IPaginationState = {
-  currentPage: 1,
-}
-
-function reducer(
-  state: IPaginationState,
-  action: {
-    type: string,
-    payload?: any,
-  },
-) {
-  switch (action.type) {
-    case 'set':
-      return {currentPage: action.payload.count}
-    case 'next':
-      return {currentPage: state.currentPage + 1}
-    case 'prev':
-      return {currentPage: state.currentPage - 1}
-    default:
-      throw new Error();
-  }
 }
 
 const PaginationBtnItem: React.FC<IPaginationBtnItem> = ({
@@ -79,6 +45,41 @@ const PaginationBtnItem: React.FC<IPaginationBtnItem> = ({
     <div className={className} onClick={handleClick}>{children}</div>
   )
 }
+
+interface IPagination {
+  total: number;
+  pageSize?: number;
+  current: number;
+  onChange: (page: number) => void
+}
+
+interface IPaginationState {
+  currentPage: number;
+}
+
+const initialState: IPaginationState = {
+  currentPage: 1,
+}
+
+function reducer(
+  state: IPaginationState,
+  action: {
+    type: string,
+    payload?: any,
+  },
+) {
+  switch (action.type) {
+    case 'set':
+      return {currentPage: action.payload.count}
+    case 'next':
+      return {currentPage: state.currentPage + 1}
+    case 'prev':
+      return {currentPage: state.currentPage - 1}
+    default:
+      throw new Error();
+  }
+}
+
 const Pagination: React.FC<IPagination> = React.memo(({
   pageSize,
   total,
