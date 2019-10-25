@@ -1,6 +1,7 @@
 import React, {
   useReducer, useCallback, useEffect,
   useRef,
+  useMemo,
 } from 'react'
 import './style.scss'
 
@@ -17,6 +18,7 @@ interface IPaginationBtnItem {
   count?: number;
   isCurrent?: boolean;
   show?: boolean;
+  isNumberBtn?: boolean;
 }
 
 interface IPaginationState {
@@ -46,24 +48,35 @@ function reducer(
   }
 }
 
-const PaginationBtnItem: React.FC<IPaginationBtnItem> = props => {
-  let className = 'item'
-  const isNumberBtn = props.disPatchkey !== 'next' && props.disPatchkey !== 'prev'
-  if (!isNumberBtn) {
-    className = String(props.disPatchkey)
-    className += props.show ? '' : ' hidden'
-  }
-  if (props.isCurrent) {
-    className += ' current'
-  }
+const PaginationBtnItem: React.FC<IPaginationBtnItem> = ({
+  isCurrent,
+  isNumberBtn,
+  show,
+  disPatchkey,
+  count,
+  onClick,
+  children,
+}) => {
+  const className = useMemo(() => {
+    let className = 'item'
+    if (!isNumberBtn) {
+      className = String(disPatchkey)
+      className += show ? '' : ' hidden'
+    }
+    if (isCurrent) {
+      className += ' current'
+    }
+    return className
+  }, [disPatchkey, show, isNumberBtn, isCurrent])
+
   const handleClick = useCallback(() => {
     if (isNumberBtn) {
-      return props.onClick({ type: 'set', payload: { count: props.count }})
+      return onClick({ type: 'set', payload: { count }})
     }
-    props.onClick({ type: props.disPatchkey })
-  }, [])
+    onClick({ type: disPatchkey })
+  }, [count, disPatchkey, isNumberBtn, onClick])
   return (
-    <div className={className} onClick={handleClick}>{props.children}</div>
+    <div className={className} onClick={handleClick}>{children}</div>
   )
 }
 const Pagination: React.FC<IPagination> = React.memo(({
@@ -82,10 +95,7 @@ const Pagination: React.FC<IPagination> = React.memo(({
       return
     }
     onChange(state.currentPage)
-    // props.onChange is not changing, so ignore this paragraph error
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.currentPage]) //
-  console.log('render pagination')
+  }, [state.currentPage, onChange])
   return (
     <div className="pagination-wrap">
       <PaginationBtnItem
@@ -105,6 +115,7 @@ const Pagination: React.FC<IPagination> = React.memo(({
               onClick={dispatch}
               key={index}
               count={showCount}
+              isNumberBtn={true}
               isCurrent={isCurrent}
             >
               {showCount}
