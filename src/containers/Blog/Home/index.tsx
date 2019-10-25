@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 import './style.scss'
 import wallPaper from '../../../assets/wallPaper.jpg'
 import SlideBar from '../../../components/Blog/SlideBar'
@@ -10,14 +11,18 @@ const Home: React.FC = () => {
   const [articles, setArticles] = useState<IArticlesRes[]>([])
   const [total, setTotal] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
+
+  // fetch articles
   useEffect(() => {
     const fetchArticleData = () => {
       fetchArticles({
         page,
         pageSize: 10,
       }).then(({ list = [], total = 0 }) => {
-        setArticles(articles.concat(list.slice(0, 2)))
-        setTotal(total)
+        batchedUpdates(() => {
+          setArticles(list)
+          setTotal(total)
+        })
       })
     }
     fetchArticleData()
@@ -42,6 +47,8 @@ const Home: React.FC = () => {
         ))}
         <Pagination
           total={total}
+          current={page}
+          onChange={setPage}
         />
       </div>
     </div>

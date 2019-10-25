@@ -2,7 +2,7 @@ import React from 'react'
 import './style.scss'
 import avatar from '../../../assets/avatar.jpg'
 
-const SlideBar: React.FC = () => {
+const SlideBar: React.FC = React.memo(() => {
   return (
     <div className="slide-bar-container">
       <div className="top" />
@@ -25,6 +25,6 @@ const SlideBar: React.FC = () => {
       </div>
     </div>
   )
-}
+})
 
 export default SlideBar

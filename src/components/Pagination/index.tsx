@@ -1,16 +1,22 @@
-import React, { useReducer, useCallback } from 'react'
+import React, {
+  useReducer, useCallback, useEffect,
+  useRef,
+} from 'react'
 import './style.scss'
 
 interface IPagination {
   total: number;
   pageSize?: number;
+  current: number;
+  onChange: (page: number) => void
 }
 
 interface IPaginationBtnItem {
   onClick: (payload: any) => void;
   disPatchkey: number | string;
   count?: number;
-  isCurrent?: boolean
+  isCurrent?: boolean;
+  show?: boolean;
 }
 
 interface IPaginationState {
@@ -45,6 +51,7 @@ const PaginationBtnItem: React.FC<IPaginationBtnItem> = props => {
   const isNumberBtn = props.disPatchkey !== 'next' && props.disPatchkey !== 'prev'
   if (!isNumberBtn) {
     className = String(props.disPatchkey)
+    className += props.show ? '' : ' hidden'
   }
   if (props.isCurrent) {
     className += ' current'
@@ -59,23 +66,35 @@ const PaginationBtnItem: React.FC<IPaginationBtnItem> = props => {
     <div className={className} onClick={handleClick}>{props.children}</div>
   )
 }
-
-const Pagination: React.FC<IPagination> = props => {
+const Pagination: React.FC<IPagination> = React.memo(({
+  pageSize,
+  total,
+  onChange,
+}) => {
+  const firstUpdate = useRef(true)
   const [state, dispatch] = useReducer(reducer, initialState)
-  const pageSize = props.pageSize || 10
-  const pageCount = Math.ceil(props.total / pageSize)
+  const pageCount = Math.ceil(total / (pageSize || 10))
   const showPrev = state.currentPage !== 1
   const showNext = state.currentPage !== pageCount
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false
+      return
+    }
+    onChange(state.currentPage)
+    // props.onChange is not changing, so ignore this paragraph error
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.currentPage]) //
+  console.log('render pagination')
   return (
     <div className="pagination-wrap">
-      {showPrev ? (
-        <PaginationBtnItem
-          disPatchkey="prev"
-          onClick={dispatch}
-        >
-          « Prev
-        </PaginationBtnItem>
-      ) : null}
+      <PaginationBtnItem
+        disPatchkey="prev"
+        onClick={dispatch}
+        show={showPrev}
+      >
+        « Prev
+      </PaginationBtnItem>
       {
         [...Array(pageCount)].map((_, index) => {
           const showCount = index + 1
@@ -93,21 +112,21 @@ const Pagination: React.FC<IPagination> = props => {
           )
         })
       }
-      {showNext ? (
-        <PaginationBtnItem
-          disPatchkey="next"
-          onClick={dispatch}
-        >
-          Next »
-        </PaginationBtnItem>
-      ) : null}
+      <PaginationBtnItem
+        disPatchkey="next"
+        onClick={dispatch}
+        show={showNext}
+      >
+        Next »
+      </PaginationBtnItem>
     </div>
   )
-}
+})
 
 Pagination.defaultProps = {
   total: 0,
   pageSize: 10,
+  onChange: () => {},
 }
 
 PaginationBtnItem.defaultProps  = {
