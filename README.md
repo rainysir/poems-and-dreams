@@ -1,7 +1,7 @@
 # Poems-and-dreams
 
 ## 简介
-基于react+ts，包含博客等功能
+基于react+hooks+ts，包含博客等功能
 
 > * 配制npm registry（[更多--私有NPM访问](http://npm.iszhy.com)）
 	```
